@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>MEGA Translation</title>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<link rel="stylesheet" type="text/css" href="/resources/css/translation.css"/>
+<script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>
+<script src="/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="/js/functions.js"></script>
+
+</head>
+
+<body>
+    <div class="background-container"></div>
+
+    <div class="megababeldashboard-header">
+        <div class="dashboard-icon">
+        </div>
+    <div class="dashboard-section">
+MEGA Translation
+	</div>
+  <div class="dashboard-subsection">
+    {% if user %}
+    Translation Management
+    {% else %}
+    {$language} - {$progress}
+    {% endif %}
+  </div>
+<div class="dashboard-client-list" id="navbar">
+            <!--<td><a href="#">All Translations</a></td>
+            <td><a href="#">Web Client</a></td>
+            <td><a href="#">iOS App</a></td>
+            <td><a href="#">Android App</a></td>
+            <td><a href="#">Windows App</a></td>-->
+            <div class="nav-link"><span class="nav-link-text">{{user.email}}</span></div>
+            {% if not (user.isAdmin or user.isAccountant or user.isDev) %}
+            <div class="nav-link"><span class="nav-link-text">Balance : {{user.balance}}</span></div>
+            {% endif %}
+            <div class="nav-link"><a href="changepw.php"><span class="nav-link-text">Change Password</span></a></div>
+            <div class="nav-link"><a href="/logout"><span class="nav-link-text">Logout</span></a></div>
+  </div>
+</div>
+<div class="megababeldashboard-subheader">
+  <div class="subheader-buttons">
+    {% if user.isAdmin %}
+  <a href="#"><div class="dashboard-buttons">Remind All</div></a>
+    {% endif %}
+    {% if user.isAdmin or user.isEditor or user.isAccountant %}
+  <a href="javascript:dosave();"><div class="save-buttons">Save</div></a>
+    {% endif %}
+  </div>
+</div>
+
+<div class="client-nav">
+  <nav class="client-navigation">
+    <ul>
+        <li><a href="/" class="account-link">Home</a></li>
+        {% if user.isDev %}
+            <li><a href="/strings/add" class="account-link">Add String</a></li>
+            <li><a href="/strings/file" class="account-link">Import Strings</a></li>
+        {% endif %}
+
+        <!--
+        {if $add}
+            <li><a href="?u={$u}&c=add" class="account-link {$addselected}">Add String</a></li>
+            <li><a href="?u={$u}&c=add&t=file" class="account-link {$batchselected}">Import Strings</a></li>
+        {else}
+
+            {section name=i loop=$sections2}
+                    <li><a href="?u={$u}&id={$sections2[i].id}{$extra_url}" class="account-link{$sections2[i].class}">
+                    {$sections2[i].name}</a></li>
+            {/section}
+            <li><a href="?u={$u}&id=all{$extra_url}" class="account-link {$allselected}">All Translations</a></li>
+            <li><a href="?u={$u}&id=pending{$extra_url}" class="account-link {$pendingselected}">Pending items</a></li>
+            {if $admin}
+            <li><a href="?u={$u}&c=add" class="account-link {$addselected}">Add String</a></li>
+            <li><a href="?u={$u}&c=add&t=file" class="account-link {$batchselected}">Import Strings</a></li>
+            <li><a href="?u={$u}&c=fix-typos" class="account-link {$fixselected}">New Strings({$newstringnumber})</a></li>
+            {/if}
+        {/if}
+
+        {if $accountant}
+        <li><a href="?u={$u}&c=payment" class="account-link {$paymentselected}">Make Payment</a></li>
+        <li><a href="?u={$u}&c=payment&id=all" class="account-link {$allpaymentsselected}">All Payments</a></li>
+        {/if}
+        {if $savebutton && !$noitems}	 
+	<a class="login-button" style="margin-right:15px;" href="javascript:dosave();">Save</a>	 
+	{/if}
+	 
+	{if $export}	 
+	<a class="login-button" style="margin-right:15px;" href="javascript:doexport();">Export</a>	 
+	{/if}
+    -->
+    </ul>
+  </nav>
+</div>
+    
+    {% block body %}
+    <div class="payment-block">
+    </div>
+    {% endblock %}
+
+
+
+    <!-- 
+    {if $payment}
+                {if $allpayments}
+                <TABLE class="dashboard-data" width="100%">
+		<TR>
+		<TR>
+                    <TH style="font-size:12pt;width: 20%" align="left"><b>Language</TD>
+                    <TH style="font-size:12pt;width: 25%" align="left"><b>Translator</b></TD>
+                    <TH style="font-size:12pt;width: 20%" align="left"><b>Amount(&euro;)</b></TD>
+                    <TH style="font-size:12pt;width: 20%" align="left"><b>Time</b></TD>
+		</TR>
+		</TR>
+		{section name=i loop=$payments}
+		<TR>
+		<TD>{$payments[i].language}</TD>
+		<TD>
+		{$payments[i].name}	
+		</TD>
+		<TD>
+		{$payments[i].amount}
+		</TD>
+                <TD>
+                {$payments[i].timestamp}
+                </TD>
+		</TR>
+		{/section}
+		</TABLE>
+                {else}
+                <div class="payment-block">
+                    <div class="payment-title">
+                    Make Payment
+                    </div>
+		<FORM method="POST" id="payment_form">
+		{if !$specialuser}
+                <div class="payment-translator-block">
+                <div class="payment-subtitle">Translator:</div>
+		<select id="translator_select_option" name="translator" class="payment-translator" onchange="GetNextNode('translator_select')">
+		{section name=i loop=$translators}
+		<option value="{$translators[i].id}" {$translators[i].selected}>{$translators[i].name}</option>
+		{/section}
+		</select>
+		</div>
+                {/if}
+                <div class="payment-amount-block">
+                <div class="payment-subtitle"> Amount(&euro;):</div>
+		<textarea class="payment-amount" id="textelement" name="paymentamount" default-value="100">100</textarea>
+		</div>
+                <div class="payment-description-block">
+                <div class="payment-subtitle">Description:</div>
+		<textarea class="payment-description" id="textelement2" name="paymentdescription"></textarea>
+		</div>
+                <div class="payment-button">
+		<a class="red-button" href="javascript:document.getElementById('payment_form').submit();">Pay</a>
+                </div>
+		</FORM>
+                </div>
+            {/if}
+        {else if $add}
+        <div class="payment-block">
+            {if $batch}
+                    <div class="payment-title">Import translation strings</div>
+            {elseif $bulk}
+                    <div class="payment-title">Add translation string (Bulk)</div>
+            {else}
+                    <div class="payment-title">Add translation string</div>
+            {/if}
+		<FORM method="POST" id="add_form" {if $batch}enctype="multipart/form-data"{/if}>
+		{if !$specialuser}
+                <div class="payment-translator-block">
+                <div class="payment-subtitle">Section:</div>
+
+		<select id="translation_select_option" class = "section-translation" name="section" onchange="GetNextNode('translation_select')">
+		{section name=i loop=$sections}
+		<option value="{$sections[i].id}" {$sections[i].selected}>{$sections[i].name}</option>
+		{/section}
+		</select>
+                </div>
+		{/if}
+        {if $bulk}
+            {if $bulk_added > 0}
+
+            <div class="payment-title">Added {$bulk_added} strings</div>
+
+            {/if}
+		<TD valign="top">JSON:</TD>
+		<TD><textarea class="tbox1" id="textelement" name="json"></textarea></TD>
+		</TR>
+        {elseif $batch}
+                <TR>
+                <br>
+                <TD colspan=2>
+                    Choose a file to import: <input name="stringbatch" type="file" />
+                </TD>
+                <br>
+                <br>
+                </TR>
+        {else}
+                <div class="payment-amount-block">
+                <div class="payment-subtitle"> Text:</div>
+                <textarea class="tbox3" id="textelement" name="item"></textarea>
+                </div>
+                <div class="payment-amount-block">
+                <div class="payment-subtitle"> Description:</div>
+                <textarea class="tbox4" id="textelement2" name="description"></textarea>
+                {if $added}<br><input type="text" onclick="this.select();" value="{$added}" style="width:100px;"><br><input type="text" onclick="this.select();" value="{$added2}" style="width:100px;">{/if}
+                </div>
+        {/if}
+                <div class="payment-button">
+                <a class="red-button" href="javascript:document.getElementById('add_form').submit();">{if $batch}Import{else}Add{/if}</a>
+		</FORM>
+                </div>
+                </div>
+            {elseif ($admin || $accountant)}
+     <table class="dashboard-data" cellpadding="10"  align="center">
+         		{section name=i loop=$agents}
+		<TR class="data-row">
+                    <TD width="10%">{$agents[i].percentage} <span class="dashboard-additional-data">{$agents[i].progress}</span></TD>
+                    <TD width="30%"><a href="{$agents[i].link}">{$agents[i].languagename}</a></TD>
+                    <TD width="20%">{$agents[i].name} <span class="dashboard-additional-data">{$agents[i].email}</span></td></TD>
+                <TD>
+                {$agents[i].lastlogin}
+                </TD>
+                {if $accountant}
+                <TD  width="15%">
+                {$agents[i].balance}
+                </TD>
+                {/if}
+                <a href="#"><td class="dashboard-email"></td></a>
+		</TR>
+		{/section}
+    </table>
+		{elseif $fix_strings}
+	
+		<FORM method="POST" id="translationfrm">
+		<INPUT type="hidden" name="scrolltop" id="scrolltop" value="0">
+		<input type="hidden" name="do" value="save">
+                <table class="translation-strings-block" cellpadding="10"  align="center">
+		{section name=i loop=$translations}
+                <TR class="string-row">
+                <TD>
+                <font style="font-size:12px; color:red; font-weight:bold;">ID:{$translations[i].id} - {$translations[i].section_name} {if $translations[i].creator} - {$translations[i].creator_email} {/if}</font><hr color="red">
+		<TABLE  class="string-data">
+		<TR class="string-input" >
+		<TD class="string-text-container-left">
+		Original text:
+		<textarea class="tbox2" id="textelement2" zname="original[{$translations[i].id}]" style="height:{$translations[i].height}px; color:gray;" readonly>{$translations[i].old_text}</textarea>
+		</TD>
+		<TD class="string-text-container-right">
+		Current text:
+		<textarea class="tbox2" id="textelement2" name="t[{$translations[i].id}]" style="height:{$translations[i].height}px;">{$translations[i].text}</textarea>
+                </TD>	
+		</TR>
+                <TR class="string-input" >
+                <TD class="string-text-container-left">
+		Original description
+		<textarea class="tbox2" id="textelement2" zname="description[{$translations[i].id}]" style="height:{$translations[i].height}px; color:gray;" readonly>{$translations[i].old_description}</textarea>
+		</TD>
+		<TD class="string-text-container-right">
+		Current description
+		<textarea class="tbox2" id="textelement2" name="d[{$translations[i].id}]" style="height:{$translations[i].height}px;">{$translations[i].description}</textarea>
+                </TD>
+        </TR>
+        <TR>
+            <TD colspan="2" style="text-align:right">
+                {if $translations[i].reviewer != 0}
+                <font color="808080">Approved by {$translations[i].reviewer_email}</font>
+                {elseif $translations[i].creator == $current_userid}
+                <font color="808080">Approve</font>
+                {else}
+                Approve
+                {/if}
+		<input type="checkbox"  name="approve_list[{$translations[i].id}]" value ="{$translations[i].id}" style="height:{$translations[i].height}px; color:gray;" {if $translations[i].reviewer != 0} checked {/if} {if $translations[i].reviewer != 0 || $translations[i].creator == $current_userid} disabled="disabled" {/if}>
+		</TD>
+        </TR>
+		</TABLE>		
+                    </TD>
+                    </TR>
+		{/section}
+                </TABLE>
+		</FORM>				
+		{else}	
+                <FORM method="POST" id="translationfrm" accept-charset="UTF-8">
+		<INPUT type="hidden" name="scrolltop" id="scrolltop" value="0">
+		<input type="hidden" name="do" value="save"> 
+                <table class="translation-strings-block" cellpadding="10"  align="center">
+		{section name=i loop=$translations}	
+                <tr class="string-row">
+                    <td>
+
+		<br>
+		<font style="font-size:12px; color:{if $translations[i].translation == ''}red; font-weight:bold;{else}gray;{/if}">{$translations[i].id}</font><hr {if $translations[i].translation == ''}color="red"{/if}>
+		<TABLE  class="string-data">
+		<TR class="string-input" >
+		<TD class="string-text-container-left">
+		Original text:
+		<textarea class="tbox2" id="textelement2" zname="original[{$translations[i].id}]" style="height:{$translations[i].height}px; color:gray;" readonly>{$translations[i].text}</textarea>
+		</TD>
+		<TD class="string-text-container-right">
+		Translation:
+		<textarea class="tbox2" id="textelement2" name="t[{$translations[i].id}]" style="height:{$translations[i].height}px;"  {if 'READONLY'|constant}readonly{/if} {$rtl}>{$translations[i].translation}</textarea></TD>			
+		</TR>
+		<TR>
+		<TD colspan="2"><font style="font-size:12px; color:gray;">{$translations[i].description}</font></TD>
+		</TR>
+                {if $translations[i].translation}
+
+                <TR id="tdfix[{$translations[i].id}]" style="display:none">
+                <TD class="string-text-container-left"></TD>
+		<TD class="string-text-container-right">
+		New Translation:
+		<textarea class="tbox2" id="textelement2" name="tfix[{$translations[i].id}]" style="height:{$translations[i].height}px;"></textarea></TD>
+        </TR>
+        <TR>
+            <TD colspan="2" style="text-align:right" class="string-control">
+                <font color="808080" style="font-size:12px">Fix Translation</font>
+		<input type="checkbox"  id="fixt_list[{$translations[i].id}]" name="fixt_list[{$translations[i].id}]" value ="{$translations[i].id}" style=" color:gray;" onclick = "fixtranslation('tdfix[{$translations[i].id}]', 'fixt_list[{$translations[i].id}]');">
+		</TD>
+        </TR>
+                {else}
+        <TR>
+            <TD colspan="2" style="text-align:right" class="string-control">
+                <font color="808080" style="font-size:12px">Can not understand the text, need more context or revision</font>
+		<input type="checkbox"  name="context_list[{$translations[i].id}]" value ="{$translations[i].id}" style=" color:gray;">
+		</TD>
+        </TR>
+                {/if}
+
+		</TABLE>		
+                    </TD>
+                    </TR>
+		{/section}	
+                </table>
+		</FORM>		
+            {/if}
+            -->
+<script type="text/javascript">
+
+function doexport()
+{
+	
+	document.getElementById('export_form').submit();	
+	
+}
+
+$(function()
+{
+    $('textarea').each(function() {
+        $(this).attr('default-value', $(this).val());
+    });
+});
+
+function dosave()
+{
+    $('#translationfrm textarea').each(function() {
+        var $this = $(this)
+        if ($this.attr('default-value') === $this.val()) {
+            $this.attr('name', '');
+        }
+    });
+	document.getElementById('scrolltop').value = $('body').scrollTop();
+	document.getElementById('translationfrm').submit();
+}
+
+$(function() {
+    $('textarea').change(function() {
+        localStorage.setItem('t_' + $(this).attr('name'), $(this).val());
+    });
+
+    
+    $('textarea').each(function() {
+        if (!$(this).val()) {
+            $(this).val(localStorage.getItem('t_' + $(this).attr('name')) || "")
+        }
+    });
+});
+
+
+</script>
+</body>
+
+</html> 
+

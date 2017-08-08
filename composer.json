@@ -1,0 +1,15 @@
+{
+    "name": "mega/babel2",
+    "description": "Newer Babel from Scratch",
+    "require": {
+        "crodas/activemongo2": "^0.4.1",
+        "silex/silex": "^1.0",
+        "twig/twig": "^1.22"
+    },
+    "authors": [
+        {
+            "name": "Cesar Rodas",
+            "email": "cr@mega.co.nz"
+        }
+    ]
+}

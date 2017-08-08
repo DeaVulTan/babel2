@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="payment-block">
+    {% if batch %}
+        <div class="payment-title">Import translation strings</div>
+    {% elseif bulk %}
+        <div class="payment-title">Add translation string (Bulk)</div>
+    {% else %}
+        <div class="payment-title">Add translation string</div>
+    {% endif %}
+	<FORM method="POST" id="add_form" {%if batch%}enctype="multipart/form-data"{%endif %}>
+        <div class="payment-translator-block">
+            <div class="payment-subtitle">Section:</div>
+		    <select id="translation_select_option" class = "section-translation" name="section">
+                {% for i,name in clients %}
+		            <option value="{{i}}">{{name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="payment-translator-block">
+            <div class="payment-subtitle">Text:</div>
+		    <textarea class="tbox3" id="textelement" name="text"></textarea>
+        </div>
+        <div class="payment-translator-block">
+            <div class="payment-subtitle">Description:</div>
+		    <textarea class="tbox4" id="textelement2" name="description"></textarea>
+        </div>
+            {% if id|default("") %}
+                <br>
+                <input type="text" onclick="this.select();" value="l[{{id}}]" style="width:100px;">
+                <br>
+                <input type="text" onclick="this.select();" value="[${{ id }}]" style="width:100px;">
+            {% endif %}
+    {% if error|default("") %}
+    <div class="payment-translator-block" id="warningmessage">
+        {{ error }}
+    </div>
+    {% endif %}
+        <div class="payment-button">
+            <a class="red-button" href="javascript:document.getElementById('add_form').submit();">Add</a>
+        </div>
+    <form> 
+</div>
+{% endblock %}

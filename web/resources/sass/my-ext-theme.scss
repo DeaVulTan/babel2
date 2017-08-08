@@ -1,0 +1,313 @@
+// Unless you want to include all components, you must set $include-default to false
+// IF you set this to true, you can also remove lines 10 to 38 of this file
+$include-default: false;
+
+// Insert your custom variables here.
+ $base-color: white;
+ 
+
+ $panel-base-color: white;
+ 
+ $panel-border-radius: null !default;
+$panel-border-width: 0;
+$panel-border-color: white;
+
+
+
+// ===============================
+// ======== PANEL TOOLS ==========
+// ===============================
+$tool-size: 15px !default;
+
+// ===============================
+// ======== PANEL HEADER =========
+// ===============================
+$panel-header-border-width: 0;
+$panel-header-inner-border: false;
+$panel-header-inner-border-width: 0;
+
+//padding
+$panel-header-padding: 15px 15px 15px 30px;
+$panel-header-vertical-padding: 5px 4px !default;
+
+//fonts
+$panel-header-font-size: 16px; //11px
+$panel-header-line-height: 19px;
+$panel-header-font-weight: normal;
+$panel-header-font-family: sourseSemibold;
+
+//icon
+$panel-header-icon-width: 30px;
+$panel-header-icon-height: 30px;
+
+//background
+$panel-header-background-gradient: none;
+
+// UI defaults
+
+$panel-header-color: #5a5e5f;
+$panel-header-background-color: white;
+
+// ===============================
+// ======== FRAMED PANEL =========
+// ===============================
+$frame-base-color: red;
+
+//border
+$panel-frame-border-radius: 0;
+$panel-frame-border-width: 0;
+
+$panel-frame-padding: 40px !default;
+
+// UI defaults
+$panel-frame-background-color: black;
+$panel-frame-border-color: $panel-border-color !default;
+
+
+
+
+$toolbar-font-size: 14px;
+
+$toolbar-background-color: white;
+$toolbar-background-gradient: null;
+$toolbar-inner-border-width: null;
+$toolbar-inner-border-color: null;
+
+//margins
+$toolbar-horizontal-spacing: 0px !default;
+$toolbar-vertical-spacing: 9px !default;
+$toolbar-footer-horizontal-spacing: 9px !default;
+$toolbar-footer-vertical-spacing: 9px !default;
+
+//border
+$toolbar-border-color: null;
+
+//spacer
+$toolbar-spacer-width: 9px !default;
+
+//separator
+$toolbar-separator-color: #a4a39f;
+$toolbar-separator-highlight-color: #a4a39f;
+
+//text
+$toolbar-text-font-family: sourseSemibold;
+$toolbar-text-font-size: 14px; //11px
+$toolbar-text-font-weight: normal !default;
+$toolbar-text-color: white;
+$toolbar-text-padding: 3px 4px 0 4px !default;
+$toolbar-text-line-height: 60px;
+
+
+
+
+$grid-base-color: #bfbbb8;
+
+// ===============================
+// ========= GRID HEADER =========
+// ===============================
+
+
+$grid-header-background-color: #bfbbb8;
+$grid-header-background-gradient: #bfbbb8;
+$grid-header-border-color: #a4a39f !default;
+$grid-header-over-border-color: a4a39f !default;
+$grid-header-over-background-color:  #bfbbb8;
+$grid-header-over-background-gradient: #bfbbb8;
+$grid-header-line-height: 19px !default;
+$grid-header-padding: 4px 7px 5px !default;
+$grid-header-trigger-height: 20px !default;
+$grid-header-trigger-width: 20px !default;
+$grid-header-color: white;
+$grid-header-font-size:14px;
+
+
+
+
+$grid-row-cell-font-size: 14px;
+$grid-row-body-font: normal 14px/19px sourseSemibold;
+
+
+$grid-row-height: 14px !default;
+$grid-row-cell-color: #383838;
+
+
+
+
+$grid-row-cell-line-height: $grid-row-cell-font-size + 6 !default;
+$grid-row-cell-font: normal 14px/19px sourseSemibold;
+//$grid-row-padding: 0 1px !default;
+
+
+
+$btn-group-background-color: #e1ddda;
+$btn-group-margin: 0px;
+$btn-group-border-radius: 3px;
+$btn-group-border-width: 0px;
+$btn-group-padding: 0px;
+
+//$btn-group-inner-border-width: 0;
+
+
+$btn-group-header-margin: 0px;
+$btn-group-header-font: normal 14px/17px sourseSemibold;
+$btn-group-header-color: #363636;
+$btn-group-header-padding: 0px;
+$btn-group-header-background-color: #e1ddda;
+
+
+
+
+
+
+$font-size:14px;
+$font-family:sourseSemibold;
+$neutral-color: #e1ddda;
+
+
+
+$button-arrow-size: 12px !default;
+$button-split-size: 13px !default;
+$button-icon-spacing: 4px !default;
+
+$button-small-border-radius: 3px !default;
+$button-small-border-width: 1px !default;
+$button-small-padding: 0px !default;
+$button-small-text-padding: 0px;
+$button-small-font-size: 14px; //11px
+$button-small-font-size-over: $button-small-font-size !default;
+$button-small-font-size-focus: $button-small-font-size-over !default;
+$button-small-font-size-pressed: $button-small-font-size !default;
+$button-small-font-size-disabled: $button-small-font-size !default;
+$button-small-font-weight: normal !default;
+$button-small-font-weight-over: $button-small-font-weight !default;
+$button-small-font-weight-focus: $button-small-font-weight-over !default;
+$button-small-font-weight-pressed: $button-small-font-weight !default;
+$button-small-font-weight-disabled: $button-small-font-weight !default;
+$button-small-font-family: $font-family !default;
+$button-small-font-family-over: $button-small-font-family !default;
+$button-small-font-family-focus: $button-small-font-family-over !default;
+$button-small-font-family-pressed: $button-small-font-family !default;
+$button-small-font-family-disabled: $button-small-font-family !default;
+$button-small-icon-size: 30px !default;
+
+
+
+//base colors for the default button
+$button-default-base-color:  #e1ddda; //F7F7F7
+$button-default-base-color-over:  #e1ddda; //E4F3FF
+$button-default-base-color-focus:  #e1ddda;
+$button-default-base-color-pressed:  #e1ddda; //B6CBE4
+$button-default-base-color-disabled:  #e1ddda; //F7F7F7
+
+$button-default-border-color:  #e1ddda;
+$button-default-border-color-over:  #e1ddda;
+$button-default-border-color-focus:  #e1ddda;
+$button-default-border-color-pressed:  #e1ddda;
+$button-default-border-color-disabled:  #e1ddda;
+
+$button-default-background-color: transparent;
+$button-default-background-color-over: transparent;
+$button-default-background-color-focus: transparent;
+$button-default-background-color-pressed: transparent;
+$button-default-background-color-disabled: transparent;
+
+$button-default-background-gradient: null;
+$button-default-background-gradient-over: null;
+$button-default-background-gradient-focus: null;
+$button-default-background-gradient-pressed: null;
+$button-default-background-gradient-disabled: null;
+
+$button-default-background-gradient-color-stops: transparent;
+$button-default-background-gradient-color-stops-over: transparent;
+$button-default-background-gradient-color-stops-focus: transparent;
+$button-default-background-gradient-color-stops-pressed: transparent;
+$button-default-background-gradient-color-stops-disabled: transparent;
+
+$button-default-color:  #363636;
+$button-default-color-over:  #363636;
+$button-default-color-focus:  #363636;
+$button-default-color-pressed:  #363636;
+$button-default-color-disabled:  #363636;
+
+// Toolbar buttons
+$button-toolbar-arrow-size: 12px !default;
+$button-toolbar-split-size: 12px !default;
+
+$button-toolbar-base-color: #e1ddda;
+
+$button-toolbar-border-color: transparent;
+$button-toolbar-border-color-over: transparent;
+$button-toolbar-border-color-focus: transparent;
+$button-toolbar-border-color-pressed: transparent;
+$button-toolbar-border-color-disabled: transparent;
+
+$button-toolbar-background-color: transparent;
+$button-toolbar-background-color-over:transparent;
+$button-toolbar-background-color-focus: transparent;
+$button-toolbar-background-color-pressed: transparent;
+$button-toolbar-background-color-disabled: transparent;
+
+$button-toolbar-background-gradient: null;
+$button-toolbar-background-gradient-over: null;
+$button-toolbar-background-gradient-focus: null;
+$button-toolbar-background-gradient-pressed: null;
+$button-toolbar-background-gradient-disabled: null;
+
+$button-toolbar-background-gradient-color-stops: transparent;
+$button-toolbar-background-gradient-color-stops-over: transparent;
+$button-toolbar-background-gradient-color-stops-focus: transparent;
+$button-toolbar-background-gradient-color-stops-pressed: transparent;
+$button-toolbar-background-gradient-color-stops-disabled: transparent;
+
+$button-toolbar-color: #363636 !default;
+$button-toolbar-color-over: $button-toolbar-color !default;
+$button-toolbar-color-focus: $button-toolbar-color-over !default;
+$button-toolbar-color-pressed: $button-toolbar-color !default;
+$button-toolbar-color-disabled: #363636;
+
+
+
+
+
+
+
+
+
+@import 'ext4/default/all';
+
+// You may remove any of the following modules that you
+// do not use in order to create a smaller css file.
+@include extjs-boundlist;
+@include extjs-button;
+@include extjs-btn-group;
+@include extjs-datepicker;
+@include extjs-colorpicker;
+@include extjs-menu;
+@include extjs-grid;
+@include extjs-form;
+    @include extjs-form-field;
+    @include extjs-form-fieldset;
+    @include extjs-form-file;
+    @include extjs-form-checkboxfield;
+    @include extjs-form-checkboxgroup;
+    @include extjs-form-triggerfield;
+    @include extjs-form-htmleditor;
+@include extjs-panel;
+@include extjs-qtip;
+@include extjs-slider;
+@include extjs-progress;
+@include extjs-toolbar;
+@include extjs-window;
+@include extjs-messagebox;
+@include extjs-tabbar;
+@include extjs-tab;
+@include extjs-tree;
+@include extjs-drawcomponent;
+@include extjs-viewport;
+
+// This line changes the location of your images when creating UIs to be relative instead of within the ExtJS directory.
+// You MUST set this to true/string value if you are creating new UIs + supporting legacy browsers.
+// This only applies to new UIs. It does not apply to default component images (i.e. when changing $base-color)
+// The value can either be true, in which case the image path will be "../images/"
+// or a string, of where the path is
+$relative-image-path-for-uis: true; // defaults to "../images/" when true

@@ -1,0 +1,66 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="/resources/css/style_login.css" />
+<title>MEGA Translation</title>
+</head>
+
+<body>
+
+	<div  class="megababel-header" onclick="location.href='/login';" onmouseover="" style="cursor: pointer;">
+	</div>
+	<div class="megababel-container">
+
+		<div class="megababel-text-title">
+			MEGA
+		</div>
+		<div class="megababel-text-body">
+			Translation
+		</div>
+
+	</div>
+	<div class="megababel-login-container">
+		<form method="post" action="/login">
+			<label for="email" class="formheading">Email Address
+			</label>
+        		<p>
+        			<input type="text" name="username" value="" placeholder="Enter your email address here...">
+        		</p>
+        		<label for="password" class="formheading">Password
+        		</label>
+        		<p>
+        			<input type="password" name="password" value="" placeholder="Enter your password here...">
+        		</p>
+        		<p class="remember_me">
+          			<label>
+          	 			Remember my login
+            				<input type="checkbox" name="remember_me" id="remember_me">
+          			</label>
+          		</p>
+        		<p class="submit">
+        			<input type="submit" name="commit" value="Login">
+        		</p>
+                        <div id="passwordwarning">
+                        <a href="reset.php">
+                            Forgot your password?
+                        </a>
+                        </div>
+                        {% if error|default("") %}
+                        <div id="warningmessage">
+                            {{ error }}
+                        </div>
+                        {% endif %}
+      	</form>
+	</div>
+  <div class="babel_footer">
+    <div class="footerdetails">
+      <img class="megalogo"> 
+        Mega Limited 2015 
+          <span class="subtlegrey">All rights reserved
+          </span>
+    </div>
+  </div>
+</body>
+
+</html> 
